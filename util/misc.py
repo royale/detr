@@ -376,6 +376,7 @@ def setup_for_distributed(is_master):
 
 
 def is_dist_avail_and_initialized():
+    return False  # dist not available: https://github.com/pytorch/pytorch/issues/41353
     if not dist.is_available():
         return False
     if not dist.is_initialized():
@@ -384,6 +385,7 @@ def is_dist_avail_and_initialized():
 
 
 def get_world_size():
+    return 1  # dist not available: https://github.com/pytorch/pytorch/issues/41353
     if not is_dist_avail_and_initialized():
         return 1
     return dist.get_world_size()
